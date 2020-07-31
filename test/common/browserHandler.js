@@ -16,6 +16,7 @@ class BrowserHandling {
         var windows = browser.getTabIds();
         for (var i = 0; i <= windows.length; i++) {
             browser.switchTab(windows[i]);
+            console.log("Title",browser.getTitle() )
             if (browser.getTitle().includes(title)) {
                 break;
             }
