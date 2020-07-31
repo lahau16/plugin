@@ -76,35 +76,46 @@ class PluginSetting {
         const length_table_imported = $$('div.gaia-admin-system-plugin-imported-wrapper table tbody tr').length
         for (let i = 1; i<=length_table_imported;i++){
             let Name_Plugin = $('div.gaia-admin-system-plugin-imported-wrapper table tbody tr:nth-child('+ i +') td:first-child div').getText();
-            if(Name == Name_Plugin){
-                const APP_USE_PLUGIN_NUMBER =$$('div.gaia-admin-system-plugin-imported-wrapper table tbody tr:nth-child(' + i + ') td:nth-child(3) div').length
-                for (let j = 1; j<=APP_USE_PLUGIN_NUMBER; j++){   
-                    const parent = browser.getUrl();    
-                    const APP_USE_PLUGIN_LINK =$('div.gaia-admin-system-plugin-imported-wrapper table tbody tr:nth-child('+ i +') td:nth-child(3) div:nth-child('+ j +') a').getAttribute("href")
-                    browser.newWindow(APP_USE_PLUGIN_LINK)
-                    browser.pause(5000)
-                    Helper.ElementHandler.click(PLUG_INS)
-                    browser.pause(5000)
-                    const length_Table_Plugin_Delete = $$('tbody.gaia-admin-listtable-table-body tr').length
-                    for (let k = 1; k <= length_Table_Plugin_Delete; k++ ){
-                        let Name_Plugin_Delete = $('tbody.gaia-admin-listtable-table-body tr:nth-child('+ k +') td:first-child div div:first-child').getText()
-                        if(Name == Name_Plugin_Delete){
-                            browser.pause(2000)
-                            $('tbody.gaia-admin-listtable-table-body tr:nth-child('+ k +') td:nth-child(4) span').click();
-                            browser.pause(2000)
-                            $(UNINSTALL_BUTTON).click()
-                            browser.pause(5000);  
-                            AppSetting.updateApp_after_remove_plugin()
-                            break  
-                        }     
-                    }
-                    browser.switchWindow(parent)
+            const APP_USE_PLUGIN_NUMBER =$$('div.gaia-admin-system-plugin-imported-wrapper table tbody tr:nth-child(' + i + ') td:nth-child(3) div').length
+            const APP_USE_PLUGIN_NONE =$('div.gaia-admin-system-plugin-imported-wrapper table tbody tr:nth-child(' + i + ') td:nth-child(3) div:first-child').getText()
+            if(Name == Name_Plugin){  
+                if (APP_USE_PLUGIN_NONE == "None"){
+                    $('div.gaia-admin-system-plugin-imported-wrapper table tbody tr:nth-child('+ i +') td:last-child img').click()
+                    $(UNINSTALL_BUTTON).click()
                     browser.pause(2000)
                 }
-                $('div.gaia-admin-system-plugin-imported-wrapper table tbody tr:nth-child('+ i +') td:last-child img').click()
-                $(UNINSTALL_BUTTON).click()
-                browser.pause(2000)
-                break
+                else{
+                    for (let j = 1; j<=APP_USE_PLUGIN_NUMBER; j++){   
+                        const parent = browser.getUrl();    
+    
+                        const APP_USE_PLUGIN_LINK =$('div.gaia-admin-system-plugin-imported-wrapper table tbody tr:nth-child('+ i +') td:nth-child(3) div:nth-child('+ j +') a').getAttribute("href")
+                        browser.newWindow(APP_USE_PLUGIN_LINK)
+                        browser.pause(5000)
+                        Helper.ElementHandler.click(PLUG_INS)
+                        browser.pause(5000)
+                        const length_Table_Plugin_Delete = $$('tbody.gaia-admin-listtable-table-body tr').length
+                        for (let k = 1; k <= length_Table_Plugin_Delete; k++ ){
+                            let Name_Plugin_Delete = $('tbody.gaia-admin-listtable-table-body tr:nth-child('+ k +') td:first-child div div:first-child').getText()
+                            if(Name == Name_Plugin_Delete){
+                                browser.pause(2000)
+                                $('tbody.gaia-admin-listtable-table-body tr:nth-child('+ k +') td:nth-child(4) span').click();
+                                browser.pause(2000)
+                                $(UNINSTALL_BUTTON).click()
+                                browser.pause(5000);  
+                                AppSetting.updateApp_after_remove_plugin()
+                                break  
+                            }     
+                        }
+                        browser.switchWindow(parent)
+                        browser.pause(2000)
+                    }
+                    $('div.gaia-admin-system-plugin-imported-wrapper table tbody tr:nth-child('+ i +') td:last-child img').click()
+                    $(UNINSTALL_BUTTON).click()
+                    browser.pause(2000)
+                    break
+                }
+
+                
             }
         }
         
