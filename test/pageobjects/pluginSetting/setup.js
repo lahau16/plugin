@@ -2,10 +2,9 @@ const Setting = require('./setting')
 const Helper = require('../../common/main')
 class Setup {
     InstallPlugin_FristTime(filePath,locator){
-        Setting.PluginSetting
-            .navigate_kintoneAdministrator()
-            .importPlugin(filePath)
-            .navigate_appSetting()
+        Setting.PluginSetting.navigate_kintoneAdministrator()
+        Setting.PluginSetting.importPlugin(filePath)
+        Setting.PluginSetting.navigate_appSetting()
         browser.pause(5000)
         Setting.PluginSetting.newPlugin()
         browser.pause(5000)
