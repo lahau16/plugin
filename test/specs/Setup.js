@@ -9,36 +9,22 @@ const APP_USE_PLUGIN = 'tbody.gaia-plugin-list-body tr:first-child td:nth-child(
 const ICON_REMOVE ='tbody.gaia-plugin-list-body tr:first-child td.gaia-system-table-menu img'
 describe('Plugins-kintone administrator', () => {
     it('[Case 1] - Install plugin', () => {
-        // Setting.Setup.InstallPlugin_FristTime(filePath,XPATH_INSTALL_PLUGIN)
         Setting.PluginSetting.navigate_kintoneAdministrator()
         Setting.PluginSetting.importPlugin(filePath)
-        browser.pause(5000)
         Setting.PluginSetting.navigate_appSetting()
-        browser.pause(5000)
         Setting.PluginSetting.newPlugin()
-        browser.pause(5000)
         Setting.PluginSetting.installPluginInApp(XPATH_INSTALL_PLUGIN)
-        browser.pause(5000)
         Setting.AppSetting.updateApp()
-        browser.pause(5000)
     });
     it('[Case 2] -Remove plugin', () => {
         Setting.PluginSetting.navigate_kintoneAdministrator()
-        browser.pause(2000)
+        // browser.pause(2000)
         Setting.PluginSetting.deletePlugin(Name_Plugin) 
     });
-    it.skip('[Case 3] - Install plugin', () => {
-        Setting.PluginSetting.navigate_kintoneAdministrator()
-        Setting.PluginSetting.importPlugin(filePath)
-        browser.pause(5000)
-        // Setting.PluginSetting.navigate_appSetting()
-        // browser.pause(5000)
-        // Setting.PluginSetting.newPlugin()
-        // browser.pause(5000)
-        // Setting.PluginSetting.installPluginInApp(XPATH_INSTALL_PLUGIN)
-        // browser.pause(5000)
-        // Setting.AppSetting.updateApp()
-        // browser.pause(5000)
+    // it.skip('[Case 3] - Install plugin', () => {
+    //     Setting.PluginSetting.navigate_appSetting()
+    //     Setting.PluginSetting.newPlugin()
+    //     Setting.PluginSetting.installPluginInApp()
 
-    });
+    // });
 })
